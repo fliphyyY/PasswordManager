@@ -2,10 +2,12 @@ package filip.ondrusek.uv.passwordmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.File;
@@ -16,15 +18,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SQLiteDatabase.loadLibs(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        SQLiteDatabase.loadLibs(this);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 createUnlockVault();
             }
-        }, 100);
+        }, 2000);
     }
 
     private void createUnlockVault()
