@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.App.Base" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="colorControlNormal">#d32f2f</item>
-        <item name="colorControlActivated">#ff5722</item>
-        <item name="colorControlHighlight">#f44336</item>
+        <item name="colorControlNormal">#3498db</item>
+        <item name="colorControlActivated">#3498db</item>
+        <item name="android:windowBackground">@color/primary_dark</item>
     </style>
 </resources>

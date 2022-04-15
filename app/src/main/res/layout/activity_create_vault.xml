@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_dark"
     tools:context=".CreateVaultActivity">
 
 
@@ -20,7 +19,6 @@
         >
 
     <EditText
-        android:textColor="#A9A9A9"
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
