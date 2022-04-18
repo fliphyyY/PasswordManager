@@ -7,27 +7,72 @@
     tools:context=".CreateVaultActivity">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_text_input_layout"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="233dp"
+        android:layout_height="60dp"
+        android:text="FlipPass..."
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintVertical_bias="0.126" />
 
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ems="10"
-        android:hint="Master password"
-        android:inputType="textPassword"
-        android:maxLength="45"
-        android:textSize="20dp"
-        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_text_input_layout"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Master password"
+            android:inputType="textPassword"
+            android:maxLength="45"
+            android:textSize="20dp"
+            android:backgroundTint="#8a8a8a"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/master_password_text_input_layout"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.462"
+        app:passwordToggleEnabled="true">
+
+
+        <EditText
+            android:id="@+id/editTextMasterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Master password again"
+            android:inputType="textPassword"
+            android:maxLength="45"
+            android:textSize="20dp"
+            android:backgroundTint="#8a8a8a"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
