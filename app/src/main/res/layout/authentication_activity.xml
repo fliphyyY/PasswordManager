@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.126"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/master_password_text_input_layout_again"
+        android:id="@+id/textInputLayoutAuthentication"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/editTextMasterPassword"
+            android:id="@+id/masterPasswordAuthentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="password"
