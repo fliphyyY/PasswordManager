@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 public class CreateVaultActivity extends AppCompatActivity {
     private EditText editTextMasterPassword, editTextMasterPasswordAgain;
     @Override

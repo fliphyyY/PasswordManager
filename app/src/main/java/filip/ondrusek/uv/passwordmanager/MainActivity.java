@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createUnlockVault()
     {
-        if(databaseExists(getApplicationContext(), "VaultDB.db"))
+        if(!databaseExists(getApplicationContext(), "VaultDB.db"))
         {
             Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
             startActivity(intent);
