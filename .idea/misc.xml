@@ -4,14 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.186" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/icon_lock_background.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/icon_lock_foreground.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/lock.xml" value="0.1225" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_button.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_create_button.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/rounded_corner_view.xml" value="0.21" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/selector.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_create_vault.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_input_password.xml" value="0.16983695652173914" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_main.xml" value="0.16983695652173914" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_my_vault.xml" value="0.11283783783783784" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_navigation.xml" value="0.1335652218218338" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_vault.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/authentication_activity.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/bottom_navigation.xml" value="0.17736486486486486" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/fragment_add_item.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/fragment_vault.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/menu_navigation.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1205" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.136" />
       </map>
     </option>
   </component>

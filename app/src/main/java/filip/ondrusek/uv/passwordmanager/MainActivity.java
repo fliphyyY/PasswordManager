@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(!databaseExists(getApplicationContext(), "VaultDB.db"))
         {
-            Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
+            Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
             startActivity(intent);
             finish();
         } else {
