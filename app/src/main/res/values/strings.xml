@@ -7,8 +7,11 @@
     <string name="create_vault_headline">FlipPass...</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Vault fragment</string>
-    <string name="min_length">Minimal password length is at least 8 characters!</string>
-    <string name="space_password">Password cannot contain space!</string>
-    <string name="number_password">Password must contain at least one number!</string>
-    <string name="special_password">Password must contain at least one special character!</string>
+    <string name="min_length">Minimal password length is at least 8 characters!!</string>
+    <string name="space_password">Password cannot contain space!!</string>
+    <string name="number_password">Password must contain at least one digit character!!</string>
+    <string name="special_password">Password must contain at least one special character!!</string>
+    <string name="letter_lower_password">Password must contain at least one lower case character!!</string>
+    <string name="letter_upper_password">Password must contain at least one upper case character!!</string>
+    <string name="match_passwords">Passwords do not match!!</string>
 </resources>
