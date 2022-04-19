@@ -13,4 +13,5 @@
     <string name="letter_lower_password">Password must contain at least one lower case character!!</string>
     <string name="letter_upper_password">Password must contain at least one upper case character!!</string>
     <string name="match_passwords">Passwords do not match!!</string>
+    <string name="no_passwords">Enter the master password!!</string>
 </resources>

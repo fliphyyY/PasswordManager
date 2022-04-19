@@ -2,31 +2,27 @@ package filip.ondrusek.uv.passwordmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.sqlcipher.database.SQLiteDatabase;
-
 import java.util.Objects;
 import java.util.regex.*;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateVaultActivity extends AppCompatActivity {
-    static final int MAX_LENGTH = 8;
+    static final int MAX_LENGTH = 5;
     private EditText masterPassword, masterPasswordAgain;
     private TextInputLayout textInputLayoutCreate, textInputLayoutCreateAgain;
     private String masterPasswordInput, masterPasswordInputAgain;
     private Button createVaultButton;
-    private KeyListener listener;
-    private boolean passwordWasCorrect;
+    private boolean passwordValidationCorrect;
+    private boolean samePasswords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +37,8 @@ public class CreateVaultActivity extends AppCompatActivity {
         textInputLayoutCreateAgain.setErrorEnabled(true);
         createVaultButton.setEnabled(false);
         masterPasswordAgain.setEnabled(false);
+        passwordValidationCorrect = false;
+        samePasswords = false;
         masterPassword.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 hideKeyboard(v);
@@ -48,23 +46,50 @@ public class CreateVaultActivity extends AppCompatActivity {
                 Objects.requireNonNull(textInputLayoutCreate.getEditText()).addTextChangedListener(new TextWatcher() {
                     @Override
                     public void onTextChanged(CharSequence text, int start, int count, int after) {
-                        passwordValidation(text);
+                        passwordValidation(text, textInputLayoutCreate, masterPasswordAgain);
                     }
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                     }
                     @Override
                     public void afterTextChanged(Editable s) {
-                        masterPasswordInput = s.toString();
-                        if(!textInputLayoutCreate.isErrorEnabled())
+                        if(s.toString().equals(masterPasswordAgain.getText().toString()) && s.length() > 0 && !textInputLayoutCreate.isErrorEnabled())
                         {
-                            masterPasswordAgain.setEnabled(true);
+                            samePasswords = true;
                         } else {
+                            samePasswords = false;
+                        }
+                        if(!textInputLayoutCreate.isErrorEnabled() && !passwordValidationCorrect) {
+                            masterPasswordAgain.setEnabled(true);
+                            passwordValidationCorrect = true;
+                            hideKeyboard(v);
+                        } else if(samePasswords) {
+                            masterPasswordAgain.setEnabled(true);
+                            createVaultButton.setEnabled(true);
+                            hideKeyboard(v);
+                        }
+                        else if(s.length() == 0 && !textInputLayoutCreate.isErrorEnabled()) {
+                            masterPasswordAgain.getText().clear();
                             masterPasswordAgain.setEnabled(false);
-                            masterPasswordAgain.clearComposingText();
-                            masterPasswordAgain.setText("");
-                            textInputLayoutCreateAgain.setErrorEnabled(false);
                             createVaultButton.setEnabled(false);
+                        }
+                        else if(s.length() == 0 && passwordValidationCorrect) {
+                            masterPasswordAgain.getText().clear();
+                            masterPasswordAgain.setEnabled(false);
+                            createVaultButton.setEnabled(false);
+                        }else {
+                            createVaultButton.setEnabled(false);
+                            if(!passwordValidationCorrect) {
+                                masterPasswordAgain.setEnabled(false);
+                            }
+                            else {
+                                masterPasswordAgain.setEnabled(true);
+                            }
+                        }
+
+                        if(textInputLayoutCreateAgain.isErrorEnabled())
+                        {
+                            textInputLayoutCreateAgain.setError(null);
                         }
 
                     }
@@ -83,13 +108,7 @@ public class CreateVaultActivity extends AppCompatActivity {
                 Objects.requireNonNull(textInputLayoutCreateAgain.getEditText()).addTextChangedListener(new TextWatcher() {
                     @Override
                     public void onTextChanged(CharSequence text, int start, int count, int after) {
-                        if(!text.toString().equals(masterPasswordInput))
-                        {
-                            textInputLayoutCreateAgain.setError(getString(R.string.match_passwords));
-                            textInputLayoutCreateAgain.setErrorEnabled(true);
-                        } else {
-                            textInputLayoutCreateAgain.setErrorEnabled(false);
-                        }
+                        passwordValidation(text, textInputLayoutCreateAgain, masterPassword);
                     }
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -98,17 +117,18 @@ public class CreateVaultActivity extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        masterPasswordInputAgain = s.toString();
-                        if(masterPasswordInput.equals(masterPasswordInputAgain)) {
+                        if(s.toString().equals(masterPassword.getText().toString()) && !textInputLayoutCreate.isErrorEnabled()) {
                             createVaultButton.setEnabled(true);
                             hideKeyboard(v);
-                            passwordWasCorrect = true;
-                        }
-
-                        if(passwordWasCorrect && !masterPasswordInput.equals(masterPasswordInputAgain) && !masterPasswordInput.equals("") && !masterPasswordInputAgain.equals("")) {
-                            passwordWasCorrect = false;
+                        } else {
                             createVaultButton.setEnabled(false);
                         }
+
+                        if(textInputLayoutCreate.isErrorEnabled())
+                        {
+                            textInputLayoutCreate.setError(null);
+                        }
+
                     }
                 });
         });
@@ -123,33 +143,43 @@ public class CreateVaultActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    private void passwordValidation(CharSequence text) {
-        if(isValidPassword(text.toString(), Pattern.compile("[a-z ]"))){
-            textInputLayoutCreate.setError(getString(R.string.letter_lower_password));
-            textInputLayoutCreate.setErrorEnabled(true);
+    private void passwordValidation(CharSequence text, TextInputLayout textInputLayout, EditText editText) {
+        String a = masterPasswordAgain.getText().toString();
+        boolean b = masterPasswordAgain.getText().toString().trim().length() == 0;
+        if(text.length() == 0){
+            textInputLayout.setError(getString(R.string.no_passwords));
+            textInputLayout.setErrorEnabled(true);
+        }
+        else if(isValidPassword(text.toString(), Pattern.compile("[a-z ]"))){
+            textInputLayout.setError(getString(R.string.letter_lower_password));
+            textInputLayout.setErrorEnabled(true);
         }
         else if(isValidPassword(text.toString(), Pattern.compile("[0-9 ]"))){
-            textInputLayoutCreate.setError(getString(R.string.number_password));
-            textInputLayoutCreate.setErrorEnabled(true);
+            textInputLayout.setError(getString(R.string.number_password));
+            textInputLayout.setErrorEnabled(true);
         }
         else if(isValidPassword(text.toString(), Pattern.compile("[A-Z ]"))){
-            textInputLayoutCreate.setError(getString(R.string.letter_upper_password));
-            textInputLayoutCreate.setErrorEnabled(true);
+            textInputLayout.setError(getString(R.string.letter_upper_password));
+            textInputLayout.setErrorEnabled(true);
         }
         else if(isValidPassword(text.toString(), Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE))) {
-            textInputLayoutCreate.setError(getString(R.string.special_password));
-            textInputLayoutCreate.setErrorEnabled(true);
+            textInputLayout.setError(getString(R.string.special_password));
+            textInputLayout.setErrorEnabled(true);
         }
         else if(text.toString().contains(" ")){
-            textInputLayoutCreate.setError(getString(R.string.space_password));
-            textInputLayoutCreate.setErrorEnabled(true);
+            textInputLayout.setError(getString(R.string.space_password));
+            textInputLayout.setErrorEnabled(true);
         }
         else if (text.length() > 0 && text.length() < MAX_LENGTH) {
-            textInputLayoutCreate.setError(getString(R.string.min_length));
-            textInputLayoutCreate.setErrorEnabled(true);
+            textInputLayout.setError(getString(R.string.min_length));
+            textInputLayout.setErrorEnabled(true);
+        }
+        else if (!text.toString().equals(editText.getText().toString()) && !(editText.getText().toString().trim().length() == 0)) {
+            textInputLayout.setError(getString(R.string.match_passwords));
+            textInputLayout.setErrorEnabled(true);
         }
         else {
-            textInputLayoutCreate.setErrorEnabled(false);
+            textInputLayout.setErrorEnabled(false);
         }
     }
 
