@@ -48,12 +48,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/createButton"
+        android:id="@+id/logInButton"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:text="@string/login_vault"
         android:textColor="#FFFFFF"
-        android:background="@drawable/login_create_button"
+        android:background="@drawable/login_create_button_enabled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -4,13 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.121" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.121" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.186" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/icon_lock_background.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/icon_lock_foreground.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/lock.xml" value="0.1225" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_button.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_create_button.xml" value="0.1" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_create_button_disabled.xml" value="0.121" />
+        <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/login_create_button_states.xml" value="0.121" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/rounded_corner_view.xml" value="0.21" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/drawable/selector.xml" value="0.1" />
         <entry key="..\:/Users/igigi/Desktop/UV/projectsAndroid/PasswordManager/app/src/main/res/layout/activity_create_vault.xml" value="0.1" />

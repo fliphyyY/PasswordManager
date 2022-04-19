@@ -13,40 +13,40 @@
         android:id="@+id/headline"
         android:layout_width="233dp"
         android:layout_height="60dp"
-        android:text="@string/create_vault_headline"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:gravity="center"
+        android:text="@string/create_vault_headline"
         android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintVertical_bias="0.096" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutCreate"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333"
-        app:passwordToggleEnabled="true"
-        app:errorEnabled="true">
+        app:layout_constraintVertical_bias="0.292"
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/masterPasswordCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="password"
             android:ems="10"
             android:hint="@string/master_password"
             android:inputType="textPassword"
             android:maxLength="45"
-            android:textSize="20sp"
-            android:autofillHints="password" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,41 +54,41 @@
         android:id="@+id/textInputLayoutCreateAgain"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.462"
-        app:passwordToggleEnabled="true"
-        app:errorEnabled="true">
+        app:layout_constraintVertical_bias="0.447"
+        app:passwordToggleEnabled="true">
 
 
         <EditText
             android:id="@+id/masterPasswordCreateAgain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autofillHints="password"
             android:ems="10"
             android:hint="@string/master_password_again"
             android:inputType="textPassword"
             android:maxLength="45"
-            android:textSize="20sp"
-            android:autofillHints="password"/>
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/createButton"
         android:layout_width="340dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:background="@drawable/login_create_button"
         android:text="@string/create_vault"
         android:textColor="#FFFFFF"
-        android:background="@drawable/login_create_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
+        app:layout_constraintVertical_bias="0.635" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

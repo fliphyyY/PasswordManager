@@ -12,15 +12,18 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateVaultActivity extends AppCompatActivity {
+    static final int MAX_LENGTH = 8;
     private EditText masterPassword, masterPasswordAgain;
     private TextInputLayout textInputLayoutCreate, textInputLayoutCreateAgain;
-    static final int MAX_LENGTH = 8;
     private String masterPasswordInput, masterPasswordInputAgain;
+    private Button createVaultButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,10 @@ public class CreateVaultActivity extends AppCompatActivity {
         masterPasswordAgain = findViewById(R.id.masterPasswordCreateAgain);
         textInputLayoutCreate = findViewById(R.id.textInputLayoutCreate);
         textInputLayoutCreateAgain = findViewById(R.id.textInputLayoutCreateAgain);
+        createVaultButton = findViewById(R.id.createButton);
         textInputLayoutCreate.setErrorEnabled(true);
         textInputLayoutCreateAgain.setErrorEnabled(true);
+        createVaultButton.setEnabled(false);
         masterPassword.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 hideKeyboard(v);
@@ -50,6 +55,10 @@ public class CreateVaultActivity extends AppCompatActivity {
                 });
 
         });
+
+        createVaultButton.setOnClickListener(v -> {
+        });
+
         masterPasswordAgain.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 hideKeyboard(v);
