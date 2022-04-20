@@ -1,18 +1,23 @@
 package filip.ondrusek.uv.passwordmanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static boolean databaseExists(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +34,9 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private void createUnlockVault()
-    {
-        if(!databaseExists(getApplicationContext(), "VaultDB.db"))
-        {
-            Intent intent = new Intent(MainActivity.this, CreateVaultActivity.class);
+    private void createUnlockVault() {
+        if (databaseExists(getApplicationContext(), "VaultDB.db")) {
+            Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -42,9 +45,5 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-    }
-    private static boolean databaseExists(Context context, String dbName) {
-        File dbFile = context.getDatabasePath(dbName);
-        return dbFile.exists();
     }
 }

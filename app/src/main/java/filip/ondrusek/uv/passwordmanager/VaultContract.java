@@ -4,8 +4,29 @@ import android.provider.BaseColumns;
 
 public class VaultContract {
 
-    private VaultContract(){}
+    public static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + VaultEntry.TABLE_NAME + " (" +
+                    VaultEntry._ID + " INTEGER PRIMARY KEY," +
+                    VaultEntry.COLUMN_NAME_NAME + " TEXT," +
+                    VaultEntry.COLUMN_NAME_USERNAME + " TEXT," +
+                    VaultEntry.COLUMN_NAME_PASSWORD + " TEXT)"; /*+
+                    VaultEntry.COLUMN_NAME_COUGH + " TEXT," +
+                    VaultEntry.COLUMN_NAME_BREATHING + " TEXT," +
+                    VaultEntry.COLUMN_NAME_FATIGUE + " TEXT," +
+                    VaultEntry.COLUMN_NAME_MUSCLE_BODY_ACHES + " TEXT," +
+                    VaultEntry.COLUMN_NAME_HEADACHE + " TEXT," +
+                    VaultEntry.COLUMN_NAME_TASTE_SMELL_LOSS + " TEXT," +
+                    VaultEntry.COLUMN_NAME_SORE_THROAT + " TEXT," +
+                    VaultEntry.COLUMN_NAME_CONGESTION_RUNNY_NOSE + " TEXT," +
+                    VaultEntry.COLUMN_NAME_NAUSEA_VOMITING + " TEXT," +
+                    VaultEntry.COLUMN_NAME_DIARRHEA + " TEXT," +
+                    VaultEntry.COLUMN_NAME_CLOSE_CONTACT + " TEXT," +
+                    VaultEntry.COLUMN_NAME_MUNICIPALITY + " TEXT)";*/
+    public static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + VaultEntry.TABLE_NAME;
 
+    private VaultContract() {
+    }
 
     public static class VaultEntry implements BaseColumns {
         public static final String TABLE_NAME = "vault";
@@ -27,26 +48,4 @@ public class VaultContract {
         public static final String COLUMN_NAME_CLOSE_CONTACT = "close_contact";
         public static final String COLUMN_NAME_MUNICIPALITY = "municipality";*/
     }
-
-    public static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + VaultEntry.TABLE_NAME + " (" +
-                    VaultEntry._ID + " INTEGER PRIMARY KEY," +
-                    VaultEntry.COLUMN_NAME_NAME + " TEXT," +
-                    VaultEntry.COLUMN_NAME_USERNAME + " TEXT," +
-                    VaultEntry.COLUMN_NAME_PASSWORD + " TEXT)"; /*+
-                    VaultEntry.COLUMN_NAME_COUGH + " TEXT," +
-                    VaultEntry.COLUMN_NAME_BREATHING + " TEXT," +
-                    VaultEntry.COLUMN_NAME_FATIGUE + " TEXT," +
-                    VaultEntry.COLUMN_NAME_MUSCLE_BODY_ACHES + " TEXT," +
-                    VaultEntry.COLUMN_NAME_HEADACHE + " TEXT," +
-                    VaultEntry.COLUMN_NAME_TASTE_SMELL_LOSS + " TEXT," +
-                    VaultEntry.COLUMN_NAME_SORE_THROAT + " TEXT," +
-                    VaultEntry.COLUMN_NAME_CONGESTION_RUNNY_NOSE + " TEXT," +
-                    VaultEntry.COLUMN_NAME_NAUSEA_VOMITING + " TEXT," +
-                    VaultEntry.COLUMN_NAME_DIARRHEA + " TEXT," +
-                    VaultEntry.COLUMN_NAME_CLOSE_CONTACT + " TEXT," +
-                    VaultEntry.COLUMN_NAME_MUNICIPALITY + " TEXT)";*/
-
-    public static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + VaultEntry.TABLE_NAME;
 }
