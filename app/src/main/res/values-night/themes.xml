@@ -7,6 +7,10 @@
         <item name="colorControlNormal">#FF8a8a8a</item>
         <item name="colorControlActivated">#FF3498db</item>
         <item name="colorControlHighlight">#FFFF0000</item>
-        <item name="android:windowBackground">@color/primary_dark</item>
     </style>
-</resources>
+
+    <style name="TextInputLayoutStyle" parent="Theme.MaterialComponents.Bridge">
+        <item name="boxStrokeColor">@color/text_input_box_stroke_color</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+=</resources>

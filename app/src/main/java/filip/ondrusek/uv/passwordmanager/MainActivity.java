@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 createUnlockVault();
             }
         }, 2000);
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createUnlockVault() {
         if (databaseExists(getApplicationContext(), "VaultDB.db")) {
-            Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
+            Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -44,6 +43,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 }
