@@ -19,4 +19,6 @@
     <string name="letter_upper_password">Password must contain at least one upper case character!!</string>
     <string name="match_passwords">Passwords do not match!!</string>
     <string name="no_passwords">Enter the master password!!</string>
+    <string name="add_item">Add item</string>
+    <string name="save_item">Save</string>
 </resources>

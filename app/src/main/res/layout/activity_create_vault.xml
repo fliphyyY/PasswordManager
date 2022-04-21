@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="#000000"
+    android:clickable="true"
     android:focusableInTouchMode="true"
     tools:context=".CreateVaultActivity">
 
@@ -18,7 +18,7 @@
         android:text="@string/create_vault_headline"
         android:textColor="#FFFFFF"
         android:textSize="35sp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
