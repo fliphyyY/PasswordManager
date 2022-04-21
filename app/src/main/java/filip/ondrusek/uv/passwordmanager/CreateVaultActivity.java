@@ -28,17 +28,7 @@ public class CreateVaultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_vault);
-        masterPassword = findViewById(R.id.masterPasswordCreate);
-        masterPasswordAgain = findViewById(R.id.masterPasswordCreateAgain);
-        textInputLayoutCreate = findViewById(R.id.textInputLayoutCreate);
-        textInputLayoutCreateAgain = findViewById(R.id.textInputLayoutCreateAgain);
-        createVaultButton = findViewById(R.id.createButton);
-        textInputLayoutCreate.setErrorEnabled(true);
-        textInputLayoutCreateAgain.setErrorEnabled(true);
-        createVaultButton.setEnabled(false);
-        masterPasswordAgain.setEnabled(false);
-        passwordValidationCorrect = false;
-        samePasswords = false;
+        init();
         masterPassword.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 hideKeyboard(v);
@@ -128,6 +118,19 @@ public class CreateVaultActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+    private void init() {
+        masterPassword = findViewById(R.id.masterPasswordCreate);
+        masterPasswordAgain = findViewById(R.id.masterPasswordCreateAgain);
+        textInputLayoutCreate = findViewById(R.id.textInputLayoutCreate);
+        textInputLayoutCreateAgain = findViewById(R.id.textInputLayoutCreateAgain);
+        createVaultButton = findViewById(R.id.createButton);
+        textInputLayoutCreate.setErrorEnabled(true);
+        textInputLayoutCreateAgain.setErrorEnabled(true);
+        createVaultButton.setEnabled(false);
+        masterPasswordAgain.setEnabled(false);
+        passwordValidationCorrect = false;
+        samePasswords = false;
     }
 
     private void hideKeyboard(View view) {

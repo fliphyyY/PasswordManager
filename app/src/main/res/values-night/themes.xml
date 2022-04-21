@@ -6,11 +6,6 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorControlNormal">#FF8a8a8a</item>
         <item name="colorControlActivated">#FF3498db</item>
-        <item name="colorControlHighlight">#FFFF0000</item>
-    </style>
-
-    <style name="TextInputLayoutStyle" parent="Theme.MaterialComponents.Bridge">
-        <item name="boxStrokeColor">@color/text_input_box_stroke_color</item>
-        <item name="boxStrokeWidth">2dp</item>
+        <item name="colorControlHighlight">#FF8a8a8a</item>
     </style>
 =</resources>

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 createUnlockVault();
             }
-        }, 2000);
+        }, 100);
     }
 
     private void createUnlockVault() {

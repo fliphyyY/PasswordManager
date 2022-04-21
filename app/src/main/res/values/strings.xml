@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">PasswordManager</string>
     <string name="create_vault">Create vault</string>
-    <string name="login_vault">Log in</string>
+    <string name="unlock_vault">Unlock vault</string>
     <string name="master_password">Master password</string>
     <string name="master_password_again">Master password again</string>
     <string name="add_name">Name</string>
     <string name="add_username">Username</string>
     <string name="add_url">URL</string>
+    <string name="add_notes">Notes</string>
     <string name="add_password">Password</string>
     <string name="create_vault_headline">FlipPass...</string>
     <string name="hello_blank_fragment">Vault fragment</string>
