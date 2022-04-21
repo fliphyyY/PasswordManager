@@ -11,13 +11,15 @@ import filip.ondrusek.uv.passwordmanager.databinding.ActivityNavigationBinding;
 
 public class NavigationActivity extends AppCompatActivity {
 
-    ActivityNavigationBinding binding;
-
+    private ActivityNavigationBinding binding;
+    private String masterPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        masterPassword = (String) getIntent().getSerializableExtra("masterPassword");
+
         replaceFragment(new VaultFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

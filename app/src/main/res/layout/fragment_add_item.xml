@@ -28,9 +28,11 @@
             android:textStyle="bold"
             android:textSize="18sp"></TextView>
         <TextView
+            android:id="@+id/save"
             android:layout_width="70dp"
             android:gravity="center"
             android:layout_height="match_parent"
+
             android:text="@string/save_item"
             android:textSize="16sp"></TextView>
     </LinearLayout>

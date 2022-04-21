@@ -65,6 +65,9 @@ public class AuthenticationActivity extends AppCompatActivity {
             unlockDb();
             if(database != null && database.isOpen()) {
                 Intent intent = new Intent(AuthenticationActivity.this, NavigationActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("masterPassword", masterPassword.getText().toString());
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
             }

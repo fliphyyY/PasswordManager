@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,7 +22,8 @@ public class AddItemFragment extends Fragment {
     private EditText name, username, password, url;
     private TextInputEditText notes;
     private View view;
-
+    private TextView saveButton;
+    private VaultDbHelper vaultDbHelper;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -57,8 +60,19 @@ public class AddItemFragment extends Fragment {
         password = view.findViewById(R.id.passwordAdd);
         url = view.findViewById(R.id.urlAdd);
         notes = view.findViewById(R.id.notesAdd);
-            return inflater.inflate(R.layout.fragment_add_item, container, false);
+        saveButton = view.findViewById(R.id.save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int a = 10;
+            }
+        });
+        return view;
     }
 
+    private void insertNewItem(View view)
+    {
+        //reportDbHelper.insertReport(database, reportValues());
+    }
 
 }
