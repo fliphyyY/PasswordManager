@@ -1,11 +1,18 @@
 package filip.ondrusek.uv.passwordmanager;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +29,10 @@ public class VaultFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private View view;
+    private VaultAdapter vaultAdapter;
+    private VaultDbHelper vaultDbHelper;
+    private String masterPassword;
 
     public VaultFragment() {
         // Required empty public constructor
@@ -57,7 +68,22 @@ public class VaultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vault, container, false);
+        view = inflater.inflate(R.layout.fragment_vault, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_vault);
+        masterPassword = getArguments().getString("masterPassword");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        vaultDbHelper = new VaultDbHelper(getContext());
+        vaultAdapter = new VaultAdapter(getContext(), getVaultItems());
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(vaultAdapter);
+        return view;
+    }
+
+    public Cursor getVaultItems() {
+        SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
+        String selectQuery = "SELECT name FROM vault";
+        String[] selectionArgs = new String[]{};
+        Cursor c = db.rawQuery(selectQuery, selectionArgs );
+        return c;
     }
 }

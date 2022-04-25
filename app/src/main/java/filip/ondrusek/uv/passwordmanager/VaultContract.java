@@ -9,7 +9,10 @@ public class VaultContract {
                     VaultEntry._ID + " INTEGER PRIMARY KEY," +
                     VaultEntry.COLUMN_NAME_NAME + " TEXT," +
                     VaultEntry.COLUMN_NAME_USERNAME + " TEXT," +
-                    VaultEntry.COLUMN_NAME_PASSWORD + " TEXT)"; /*+
+                    VaultEntry.COLUMN_NAME_PASSWORD + " TEXT," +
+                    VaultEntry.COLUMN_NAME_URL + " TEXT," +
+                    VaultEntry.COLUMN_NAME_NOTES + " TEXT)";/*+
+                    /*+
                     VaultEntry.COLUMN_NAME_COUGH + " TEXT," +
                     VaultEntry.COLUMN_NAME_BREATHING + " TEXT," +
                     VaultEntry.COLUMN_NAME_FATIGUE + " TEXT," +
@@ -31,8 +34,10 @@ public class VaultContract {
     public static class VaultEntry implements BaseColumns {
         public static final String TABLE_NAME = "vault";
         public static final String COLUMN_NAME_NAME = "name";
-        public static final String COLUMN_NAME_PASSWORD = "password";
         public static final String COLUMN_NAME_USERNAME = "username";
+        public static final String COLUMN_NAME_PASSWORD = "password";
+        public static final String COLUMN_NAME_URL = "url";
+        public static final String COLUMN_NAME_NOTES = "notes";
         /*public static final String COLUMN_NAME_SYMPTOMS_START_DATE = "symptoms_start_date";
         public static final String COLUMN_NAME_FEVER_CHILLS = "fever_chills";
         public static final String COLUMN_NAME_COUGH = "cough";

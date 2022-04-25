@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".VaultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:textColor="@color/primary_dark"
+        android:gravity="center"
+        android:id="@+id/recycler_view_vault"/>
 </FrameLayout>

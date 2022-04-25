@@ -13,12 +13,6 @@ import net.sqlcipher.database.SQLiteDatabase;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static boolean databaseExists(Context context, String dbName) {
-        File dbFile = context.getDatabasePath(dbName);
-        return dbFile.exists();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,4 +38,11 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
+
+    private static boolean databaseExists(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
+    }
+
 }

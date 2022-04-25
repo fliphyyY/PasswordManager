@@ -19,17 +19,28 @@ public class NavigationActivity extends AppCompatActivity {
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         masterPassword = (String) getIntent().getSerializableExtra("masterPassword");
-
-        replaceFragment(new VaultFragment());
+        Bundle bundleVault = new Bundle();
+        bundleVault.putString("masterPassword", masterPassword);
+        VaultFragment vaultFragment = new VaultFragment();
+        vaultFragment.setArguments(bundleVault);
+        replaceFragment(vaultFragment);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             switch (item.getItemId()) {
                 case R.id.vault:
-                    replaceFragment(new VaultFragment());
+                    Bundle bundleVaultSwitch = new Bundle();
+                    bundleVaultSwitch.putString("masterPassword", masterPassword);
+                    VaultFragment vaultFragmentSwitch = new VaultFragment();
+                    vaultFragmentSwitch.setArguments(bundleVaultSwitch);
+                    replaceFragment(vaultFragmentSwitch);
                     break;
                 case R.id.add:
-                    replaceFragment(new AddItemFragment());
+                    Bundle bundleAdd = new Bundle();
+                    bundleAdd.putString("masterPassword", masterPassword);
+                    AddItemFragment addItemFragment = new AddItemFragment();
+                    addItemFragment.setArguments(bundleAdd);
+                    replaceFragment(addItemFragment);
                     break;
                 case R.id.settings:
                     replaceFragment(new SettingsFragment());

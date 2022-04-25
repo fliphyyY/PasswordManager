@@ -3,19 +3,27 @@ package filip.ondrusek.uv.passwordmanager;
 import static filip.ondrusek.uv.passwordmanager.VaultContract.SQL_CREATE_ENTRIES;
 import static filip.ondrusek.uv.passwordmanager.VaultContract.SQL_DELETE_ENTRIES;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteException;
 import net.sqlcipher.database.SQLiteOpenHelper;
+
+import java.io.File;
 
 public class VaultDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "VaultDB.db";
-    public static final String PASS_PHRASE = "123456";
+    private final static String TAG = "VaultDbHelper";
     private static VaultDbHelper instance;
+    private Context context;
 
     public VaultDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -33,5 +41,24 @@ public class VaultDbHelper extends SQLiteOpenHelper {
     public void onDelete(SQLiteDatabase db) {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+
+    public void insertItem(VaultDbHelper vaultDbHelper, ContentValues reportValues, String masterPassword)
+    {
+        SQLiteDatabase db = this.getDatabase(masterPassword);
+        db.insert(VaultContract.VaultEntry.TABLE_NAME, null, reportValues);
+    }
+
+    public SQLiteDatabase getDatabase(String masterPassword)
+    {
+        SQLiteDatabase.loadLibs(context);
+        SQLiteDatabase db = null;
+        File databaseFile = context.getDatabasePath("VaultDB.db");
+        try {
+            db = SQLiteDatabase.openOrCreateDatabase(databaseFile, masterPassword, null );
+        } catch (SQLiteException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return db;
     }
 }

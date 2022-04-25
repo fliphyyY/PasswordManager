@@ -1,6 +1,7 @@
 package filip.ondrusek.uv.passwordmanager;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class AddItemFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String masterPassword;
 
     public AddItemFragment() {
         // Required empty public constructor
@@ -61,18 +63,27 @@ public class AddItemFragment extends Fragment {
         url = view.findViewById(R.id.urlAdd);
         notes = view.findViewById(R.id.notesAdd);
         saveButton = view.findViewById(R.id.save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int a = 10;
-            }
-        });
+        vaultDbHelper = new VaultDbHelper(getContext());
+        masterPassword = getArguments().getString("masterPassword");
+        saveButton.setOnClickListener(view -> insertNewItem(view));
         return view;
     }
 
     private void insertNewItem(View view)
     {
-        //reportDbHelper.insertReport(database, reportValues());
+        String name = this.name.getText().toString();
+        String username = this.username.getText().toString();
+        String password = this.password.getText().toString();
+        String url = this.url.getText().toString();
+        String notes = this.notes.getText().toString();
+
+        ContentValues itemValues = new ContentValues();
+        itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_NAME, name);
+        itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_USERNAME, username);
+        itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_PASSWORD, password);
+        itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_URL, url);
+        itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_NOTES, notes);
+        vaultDbHelper.insertItem(vaultDbHelper, itemValues, masterPassword);
     }
 
 }
