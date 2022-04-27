@@ -1,20 +1,23 @@
 package filip.ondrusek.uv.passwordmanager;
 
-import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+
+import filip.ondrusek.uv.passwordmanager.databinding.ActivityNavigationBinding;
 
 public class AddItemFragment extends Fragment {
 
@@ -29,6 +32,9 @@ public class AddItemFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private String masterPassword;
+    private BottomNavigationView bottomNavigationView;
+    private ActivityNavigationBinding binding;
+
 
     public AddItemFragment() {
         // Required empty public constructor
@@ -64,8 +70,22 @@ public class AddItemFragment extends Fragment {
         notes = view.findViewById(R.id.notesAdd);
         saveButton = view.findViewById(R.id.save);
         vaultDbHelper = new VaultDbHelper(getContext());
+        bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         masterPassword = getArguments().getString("masterPassword");
-        saveButton.setOnClickListener(view -> insertNewItem(view));
+        saveButton.setOnClickListener(view -> {
+            if(isNameEmpty(view)) {
+                openEmptyNameDialog();
+            }
+            else {
+                insertNewItem(view);
+                Bundle bundleVaultChange = new Bundle();
+                bundleVaultChange.putString("masterPassword", masterPassword);
+                VaultFragment vaultFragmentChange = new VaultFragment();
+                vaultFragmentChange.setArguments(bundleVaultChange);
+                replaceFragment(vaultFragmentChange);
+                bottomNavigationView.setSelectedItemId(R.id.vault);
+            }
+        });
         return view;
     }
 
@@ -84,6 +104,27 @@ public class AddItemFragment extends Fragment {
         itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_URL, url);
         itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_NOTES, notes);
         vaultDbHelper.insertItem(vaultDbHelper, itemValues, masterPassword);
+    }
+
+    public void openEmptyNameDialog()
+    {
+        EmptyNameDialog emptyNameDialog = new EmptyNameDialog();
+        emptyNameDialog.show(getActivity().getSupportFragmentManager(), "empty name");
+    }
+
+    private boolean isNameEmpty(View view)
+    {
+        if(this.name.getText().length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
 }

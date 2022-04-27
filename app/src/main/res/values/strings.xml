@@ -10,6 +10,7 @@
     <string name="add_notes">Notes</string>
     <string name="add_password">Password</string>
     <string name="create_vault_headline">FlipPass...</string>
+    <string name="empty_name_text">The Name field is required.</string>
     <string name="hello_blank_fragment">Vault fragment</string>
     <string name="min_length">Minimal password length is at least 8 characters!!</string>
     <string name="space_password">Password cannot contain space!!</string>
