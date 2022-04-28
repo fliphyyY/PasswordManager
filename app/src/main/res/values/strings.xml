@@ -22,4 +22,5 @@
     <string name="no_passwords">Enter the master password!!</string>
     <string name="add_item">Add item</string>
     <string name="save_item">Save</string>
+    <string name="added_item">New item created.</string>
 </resources>
