@@ -1,5 +1,6 @@
 package filip.ondrusek.uv.passwordmanager;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,6 +34,15 @@ public class VaultFragment extends Fragment {
     private VaultAdapter vaultAdapter;
     private VaultDbHelper vaultDbHelper;
     private String masterPassword;
+    private final View.OnClickListener onItemClickListener = view -> {
+        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+        int position = viewHolder.getAdapterPosition();
+       /* String reportCode = mArrayList.get(position);
+        Cursor cursor = getRowByDiagnosticCode(reportCode, reportDbHelper);
+        createReportObject(cursor);*/
+        Intent intent = new Intent(getActivity(), VaultItemDetails.class);
+        startActivity(intent);
+    };
 
     public VaultFragment() {
         // Required empty public constructor
@@ -76,6 +86,7 @@ public class VaultFragment extends Fragment {
         vaultAdapter = new VaultAdapter(getContext(), getVaultItems());
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(vaultAdapter);
+        vaultAdapter.setOnItemClickListener(onItemClickListener);
         return view;
     }
 

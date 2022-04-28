@@ -13,19 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHolder> {
     private Context mContext;
     private Cursor vaultCursor;
+    private View.OnClickListener onItemClickListener;
 
 
     public VaultAdapter(Context context, Cursor cursor) {
         mContext = context;
         vaultCursor = cursor;
     }
-
+    public void setOnItemClickListener(View.OnClickListener itemClickListener) {
+        this.onItemClickListener = itemClickListener;
+    }
 
     public class VaultViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public VaultViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textviewVaultList);
+            itemView.setTag(this);
+            itemView.setOnClickListener(onItemClickListener);
         }
     }
 
