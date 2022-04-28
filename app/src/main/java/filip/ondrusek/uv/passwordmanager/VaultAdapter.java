@@ -23,7 +23,6 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
     private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
 
-
     public VaultAdapter(Context context, Cursor cursor, String masterPassword) {
         this.mContext = context;
         this.vaultCursor = cursor;
@@ -68,7 +67,7 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
                     String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
                     vaultDbHelper.deleteItem(masterPassword,Integer.valueOf(id));
                     setVaultCursor(getVaultItems());
-                    notifyDataSetChanged();
+                    notifyItemRemoved(getAdapterPosition());
                     return true;
                 default:
                     return false;
