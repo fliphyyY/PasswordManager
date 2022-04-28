@@ -43,11 +43,18 @@ public class VaultDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertItem(VaultDbHelper vaultDbHelper, ContentValues reportValues, String masterPassword)
+    public void insertItem(ContentValues reportValues, String masterPassword)
     {
         SQLiteDatabase db = this.getDatabase(masterPassword);
         db.insert(VaultContract.VaultEntry.TABLE_NAME, null, reportValues);
     }
+
+    public void deleteItem(String masterPassword, int id)
+    {
+        SQLiteDatabase db = this.getDatabase(masterPassword);
+        db.delete(VaultContract.VaultEntry.TABLE_NAME, "_id = ?",new String[]{String.valueOf(id)});
+    }
+
 
     public SQLiteDatabase getDatabase(String masterPassword)
     {

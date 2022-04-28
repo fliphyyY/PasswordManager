@@ -14,15 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHolder> {
     private Context mContext;
-    private Cursor vaultCursor;
+    public Cursor vaultCursor;
+    private String masterPassword;
+    private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
 
 
-    public VaultAdapter(Context context, Cursor cursor) {
-        mContext = context;
-        vaultCursor = cursor;
+    public VaultAdapter(Context context, Cursor cursor, String masterPassword) {
+        this.mContext = context;
+        this.vaultCursor = cursor;
+        this.masterPassword = masterPassword;
+        vaultDbHelper = new VaultDbHelper(mContext.getApplicationContext());
+
     }
     public void setOnItemClickListener(View.OnClickListener itemClickListener) {
         this.onItemClickListener = itemClickListener;
@@ -56,6 +63,12 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_popup_delete:
+                    Cursor cursor = getVaultCursor();
+                    cursor.moveToPosition(getAdapterPosition());
+                    String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
+                    vaultDbHelper.deleteItem(masterPassword,Integer.valueOf(id));
+                    setVaultCursor(getVaultItems());
+                    notifyDataSetChanged();
                     return true;
                 default:
                     return false;
@@ -86,5 +99,19 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
     @Override
     public int getItemCount() {
         return vaultCursor.getCount();
+    }
+    public Cursor getVaultCursor() { return vaultCursor; }
+
+    public void setVaultCursor(Cursor newCursor)
+    {
+        this.vaultCursor = newCursor;
+    }
+
+    private Cursor getVaultItems() {
+        SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
+        String selectQuery = "SELECT _id, name FROM vault";
+        String[] selectionArgs = new String[]{};
+        Cursor c = db.rawQuery(selectQuery, selectionArgs );
+        return c;
     }
 }

@@ -83,7 +83,7 @@ public class VaultFragment extends Fragment {
         masterPassword = getArguments().getString("masterPassword");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         vaultDbHelper = new VaultDbHelper(getContext());
-        vaultAdapter = new VaultAdapter(getContext(), getVaultItems());
+        vaultAdapter = new VaultAdapter(getContext(), getVaultItems(), masterPassword);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(vaultAdapter);
         vaultAdapter.setOnItemClickListener(onItemClickListener);

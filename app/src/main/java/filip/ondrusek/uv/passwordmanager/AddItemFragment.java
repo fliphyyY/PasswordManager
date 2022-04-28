@@ -107,7 +107,7 @@ public class AddItemFragment extends Fragment {
         itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_PASSWORD, password);
         itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_URL, url);
         itemValues.put(VaultContract.VaultEntry.COLUMN_NAME_NOTES, notes);
-        vaultDbHelper.insertItem(vaultDbHelper, itemValues, masterPassword);
+        vaultDbHelper.insertItem(itemValues, masterPassword);
     }
 
     public void openEmptyNameDialog()
