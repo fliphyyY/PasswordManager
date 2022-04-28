@@ -92,7 +92,7 @@ public class VaultFragment extends Fragment {
 
     public Cursor getVaultItems() {
         SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
-        String selectQuery = "SELECT name FROM vault";
+        String selectQuery = "SELECT _id, name FROM vault";
         String[] selectionArgs = new String[]{};
         Cursor c = db.rawQuery(selectQuery, selectionArgs );
         return c;

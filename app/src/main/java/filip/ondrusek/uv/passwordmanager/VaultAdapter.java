@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,9 +27,11 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
 
     public class VaultViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
+        public ImageButton imageButton;
         public VaultViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textviewVaultList);
+            imageButton = itemView.findViewById(R.id.imageButton);
             itemView.setTag(this);
             itemView.setOnClickListener(onItemClickListener);
         }
