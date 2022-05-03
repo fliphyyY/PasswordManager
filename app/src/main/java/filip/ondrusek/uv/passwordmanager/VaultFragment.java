@@ -41,10 +41,13 @@ public class VaultFragment extends Fragment {
         int position = viewHolder.getAdapterPosition();
         String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
         Cursor itemCursor = getVaultItemDetails(id);
+        Intent intent = new Intent(getActivity(), VaultItemDetails.class);
         createItemObject(itemCursor);
         Bundle b = new Bundle();
         b.putSerializable("vaultModel", getVaultModel());
-        Intent intent = new Intent(getActivity(), VaultItemDetails.class);
+        intent.putExtras(b);
+        b.putSerializable("masterPassword", masterPassword);
+        intent.putExtras(b);
         startActivity(intent);
     };
 

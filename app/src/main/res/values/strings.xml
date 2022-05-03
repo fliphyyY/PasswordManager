@@ -21,6 +21,8 @@
     <string name="match_passwords">Passwords do not match!!</string>
     <string name="no_passwords">Enter the master password!!</string>
     <string name="add_item">Add item</string>
+    <string name="view_item">View Item</string>
     <string name="save_item">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="added_item">New item created.</string>
 </resources>
