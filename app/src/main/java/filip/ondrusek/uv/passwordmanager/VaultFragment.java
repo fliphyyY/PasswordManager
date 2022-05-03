@@ -34,12 +34,16 @@ public class VaultFragment extends Fragment {
     private VaultAdapter vaultAdapter;
     private VaultDbHelper vaultDbHelper;
     private String masterPassword;
+    private Cursor vaultCursor;
+    private VaultModel vaultModel;
     private final View.OnClickListener onItemClickListener = view -> {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
         int position = viewHolder.getAdapterPosition();
-       /* String reportCode = mArrayList.get(position);
-        Cursor cursor = getRowByDiagnosticCode(reportCode, reportDbHelper);
-        createReportObject(cursor);*/
+        String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
+        Cursor itemCursor = getVaultItemDetails(id);
+        createItemObject(itemCursor);
+        Bundle b = new Bundle();
+        b.putSerializable("vaultModel", getVaultModel());
         Intent intent = new Intent(getActivity(), VaultItemDetails.class);
         startActivity(intent);
     };
@@ -83,7 +87,8 @@ public class VaultFragment extends Fragment {
         masterPassword = getArguments().getString("masterPassword");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         vaultDbHelper = new VaultDbHelper(getContext());
-        vaultAdapter = new VaultAdapter(getContext(), getVaultItems(), masterPassword);
+        vaultCursor = getVaultItems();
+        vaultAdapter = new VaultAdapter(getContext(), vaultCursor, masterPassword);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(vaultAdapter);
         vaultAdapter.setOnItemClickListener(onItemClickListener);
@@ -96,5 +101,34 @@ public class VaultFragment extends Fragment {
         String[] selectionArgs = new String[]{};
         Cursor c = db.rawQuery(selectQuery, selectionArgs );
         return c;
+    }
+
+    private Cursor getVaultItemDetails(String id) {
+        SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
+        String selectQuery = "SELECT * FROM vault WHERE _id = ?";
+        String[] selectionArgs = new String[]{id};
+        Cursor c = db.rawQuery(selectQuery, selectionArgs);
+        return c;
+    }
+
+    private void createItemObject(Cursor cursor) {
+        try {
+            cursor.moveToFirst();
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_NAME));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_USERNAME));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_PASSWORD));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_URL));
+                String notes = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_NOTES));
+                vaultModel = new VaultModel(name, username, password, url, notes);
+            } while (cursor.moveToNext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public VaultModel getVaultModel()
+    {
+        return vaultModel;
     }
 }

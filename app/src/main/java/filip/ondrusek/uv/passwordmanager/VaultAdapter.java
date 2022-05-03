@@ -18,7 +18,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHolder> {
     private Context mContext;
-    public Cursor vaultCursor;
+    private Cursor vaultCursor;
     private String masterPassword;
     private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
