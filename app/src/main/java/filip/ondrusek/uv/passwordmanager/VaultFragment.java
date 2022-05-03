@@ -39,12 +39,15 @@ public class VaultFragment extends Fragment {
     private final View.OnClickListener onItemClickListener = view -> {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
         int position = viewHolder.getAdapterPosition();
-        String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
-        Cursor itemCursor = getVaultItemDetails(id);
+        Cursor allItems = getVaultItems();
+        allItems.moveToPosition(position);
+        String id = getItemId(allItems);
         Intent intent = new Intent(getActivity(), VaultItemDetails.class);
-        createItemObject(itemCursor);
+        Cursor vaultItem = getItemById(id);
+        createItemObject(vaultItem);
+        allItems.close();
         Bundle b = new Bundle();
-        b.putSerializable("vaultModel", getVaultModel());
+        b.putSerializable("vaultModel", vaultModel);
         intent.putExtras(b);
         b.putSerializable("masterPassword", masterPassword);
         intent.putExtras(b);
@@ -106,7 +109,7 @@ public class VaultFragment extends Fragment {
         return c;
     }
 
-    private Cursor getVaultItemDetails(String id) {
+    public Cursor getItemById(String id) {
         SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
         String selectQuery = "SELECT * FROM vault WHERE _id = ?";
         String[] selectionArgs = new String[]{id};
@@ -128,6 +131,10 @@ public class VaultFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String getItemId(Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
     }
 
     public VaultModel getVaultModel()

@@ -36,7 +36,6 @@ public class AddItemFragment extends Fragment {
     private String mParam2;
     private String masterPassword;
     private BottomNavigationView bottomNavigationView;
-    private ActivityNavigationBinding binding;
 
 
     public AddItemFragment() {

@@ -65,7 +65,7 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
                     Cursor cursor = getVaultCursor();
                     cursor.moveToPosition(getAdapterPosition());
                     String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
-                    vaultDbHelper.deleteItem(masterPassword,Integer.valueOf(id));
+                    vaultDbHelper.deleteItem(masterPassword,id);
                     setVaultCursor(getVaultItems());
                     notifyItemRemoved(getAdapterPosition());
                     return true;

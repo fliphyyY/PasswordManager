@@ -49,10 +49,10 @@ public class VaultDbHelper extends SQLiteOpenHelper {
         db.insert(VaultContract.VaultEntry.TABLE_NAME, null, reportValues);
     }
 
-    public void deleteItem(String masterPassword, int id)
+    public void deleteItem(String masterPassword, String id)
     {
         SQLiteDatabase db = this.getDatabase(masterPassword);
-        db.delete(VaultContract.VaultEntry.TABLE_NAME, "_id = ?",new String[]{String.valueOf(id)});
+        db.delete(VaultContract.VaultEntry.TABLE_NAME, "_id = ?",new String[]{id});
     }
 
 

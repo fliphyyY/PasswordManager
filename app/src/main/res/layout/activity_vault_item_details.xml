@@ -39,14 +39,14 @@
         android:id="@+id/nameTextInputDetail"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:errorEnabled="true"
+        android:hint="@string/add_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
-        app:helperText="Required">
+        app:expandedHintEnabled="false"
+        app:layout_constraintVertical_bias="0.13">
 
 
         <EditText
@@ -55,25 +55,27 @@
             android:layout_height="match_parent"
             android:autofillHints="name"
             android:ems="10"
-            android:hint="@string/add_name"
             android:textColor="#d3d3d3"
-            android:inputType="text"
             android:maxLength="25"
             android:maxLines="1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:inputType="none"
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameTextInputDetail"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
+        android:hint="@string/add_username"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.299">
+        app:layout_constraintVertical_bias="0.299"
+        app:expandedHintEnabled="false">
 
 
         <EditText
@@ -83,11 +85,11 @@
             android:autofillHints="name"
             android:ems="10"
             android:textColor="#d3d3d3"
-            android:hint="@string/add_username"
-            android:inputType="text"
+            android:inputType="none"
             android:maxLength="25"
             android:maxLines="1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:enabled="false"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +98,7 @@
         android:id="@+id/passwordTextDetail"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
+        android:hint="@string/add_password"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +106,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.466"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:expandedHintEnabled="false">
 
         <EditText
             android:id="@+id/passwordDetail"
@@ -111,25 +115,26 @@
             android:layout_height="match_parent"
             android:autofillHints="password"
             android:ems="10"
-            android:hint="@string/add_password"
             android:textColor="#d3d3d3"
             android:inputType="textPassword"
             android:maxLength="45"
             android:maxLines="1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/urlTextInputDetail"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        app:errorEnabled="true"
+        android:hint="@string/add_url"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624">
+        app:layout_constraintVertical_bias="0.624"
+        app:expandedHintEnabled="false">
 
 
         <EditText
@@ -138,12 +143,12 @@
             android:layout_height="match_parent"
             android:autofillHints="name"
             android:ems="10"
-            android:hint="@string/add_url"
             android:inputType="textUri"
             android:maxLength="25"
             android:textColor="#d3d3d3"
             android:maxLines="1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -152,22 +157,25 @@
         android:layout_width="340dp"
         android:layout_height="200dp"
         android:hint="@string/add_notes"
+        app:expandedHintEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:expandedHintEnabled="false">
+        app:layout_constraintTop_toBottomOf="@+id/urlTextInputDetail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/notesDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="name"
-            android:inputType="textMultiLine"
             android:ems="10"
-            android:textColor="#d3d3d3"
-            android:maxLines="5"
             android:gravity="top"
-            android:textSize="20sp"/>
+            android:inputType="textMultiLine"
+            android:maxLength="144"
+            android:maxLines="5"
+            android:textColor="#d3d3d3"
+            android:textSize="20sp"
+            android:enabled="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
