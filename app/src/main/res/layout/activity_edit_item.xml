@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#000000"
-        android:gravity="left"
+        android:gravity="center"
         android:clickable="true"
         android:focusableInTouchMode="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +23,7 @@
             android:id="@+id/cancel_buttonEdit"
             android:layout_width="70dp"
             android:gravity="center"
+            android:layout_marginRight="50dp"
             android:layout_height="match_parent"
             android:text="@string/cancel"
             android:textSize="16sp"></TextView>
@@ -32,8 +33,16 @@
             android:gravity="center"
             android:text="@string/edit_item_headline"
             android:textStyle="bold"
-            android:layout_marginLeft="50dp"
             android:textSize="18sp"></TextView>
+
+        <TextView
+            android:id="@+id/saveEdit"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:layout_marginLeft="70dp"
+            android:layout_height="match_parent"
+            android:text="@string/save_item"
+            android:textSize="16sp"></TextView>
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameTextInputEdit"

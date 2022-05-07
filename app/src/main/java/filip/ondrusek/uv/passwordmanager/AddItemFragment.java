@@ -134,9 +134,11 @@ public class AddItemFragment extends Fragment {
     {
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.toast_layout, (ViewGroup) view.findViewById(R.id.toast_root));
+        TextView toastText = layout.findViewById(R.id.toast_text);
         Toast toast = new Toast(getContext());
         toast.setGravity(Gravity.CENTER, 0,600);
         toast.setDuration(Toast.LENGTH_LONG);
+        toastText.setText("New item created.");
         toast.setView(layout);
         toast.show();
     }

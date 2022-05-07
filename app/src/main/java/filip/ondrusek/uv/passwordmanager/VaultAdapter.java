@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
@@ -66,16 +68,10 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
+            Cursor cursor = getVaultCursor();
+            cursor.moveToPosition(getAdapterPosition());
             String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
             switch (item.getItemId()) {
-
-                case R.id.action_popup_delete:
-                    Cursor cursor = getVaultCursor();
-                    cursor.moveToPosition(getAdapterPosition());
-                    vaultDbHelper.deleteItem(masterPassword,id);
-                    setVaultCursor(getVaultItems());
-                    notifyItemRemoved(getAdapterPosition());
-                    return true;
                 case R.id.action_popup_edit:
                     setVaultCursor(getItemById(id));
                     createItemObject(vaultCursor);
@@ -89,6 +85,12 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
                     b.putSerializable("masterPassword", masterPassword);
                     intent.putExtras(b);
                     mContext.startActivity(intent);
+                    return true;
+                case R.id.action_popup_delete:
+                    vaultDbHelper.deleteItem(masterPassword,id);
+                    setVaultCursor(getVaultItems());
+                    notifyItemRemoved(getAdapterPosition());
+                    showToast();
                     return true;
                 default:
                     return false;
@@ -157,5 +159,18 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void showToast()
+    {
+        View layout = LayoutInflater.from(mContext).inflate(R.layout.toast_layout, null);
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        Toast toast = new Toast(mContext);
+        toast.setGravity(Gravity.CENTER, 0,600);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toastText.setText("Item deleted.");
+        toast.setView(layout);
+        toast.show();
     }
 }
