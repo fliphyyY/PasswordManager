@@ -41,8 +41,8 @@ public class VaultItemDetails extends AppCompatActivity {
         });
         name.setText(vaultModel.getName());
         username.setText(vaultModel.getUsername());
-        password.setText(vaultModel.getUsername());
-        url.setText(vaultModel.getPassword());
+        password.setText(vaultModel.getPassword());
+        url.setText(vaultModel.getUrl());
         notes.setText(vaultModel.getNotes());
     }
 

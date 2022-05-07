@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Base">
         <activity
+            android:name=".EditItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".VaultItemDetails"
             android:exported="false" />
         <activity

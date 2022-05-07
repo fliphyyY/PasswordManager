@@ -1,6 +1,7 @@
 package filip.ondrusek.uv.passwordmanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,9 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
     private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
 
+    public VaultAdapter(){
+
+    }
     public VaultAdapter(Context context, Cursor cursor, String masterPassword) {
         this.mContext = context;
         this.vaultCursor = cursor;
@@ -60,15 +64,19 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
+            Cursor cursor = getVaultCursor();
+            cursor.moveToPosition(getAdapterPosition());
+            String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
             switch (item.getItemId()) {
+
                 case R.id.action_popup_delete:
-                    Cursor cursor = getVaultCursor();
-                    cursor.moveToPosition(getAdapterPosition());
-                    String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
                     vaultDbHelper.deleteItem(masterPassword,id);
                     setVaultCursor(getVaultItems());
                     notifyItemRemoved(getAdapterPosition());
                     return true;
+                case R.id.action_popup_edit:
+                    Intent intent = new Intent(mContext, EditItemActivity.class);
+                    mContext.startActivity(intent);
                 default:
                     return false;
             }
