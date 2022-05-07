@@ -1,26 +1,22 @@
 package filip.ondrusek.uv.passwordmanager;
 
 import android.content.ContentValues;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
-import filip.ondrusek.uv.passwordmanager.databinding.ActivityNavigationBinding;
+
 
 public class AddItemFragment extends Fragment {
 
@@ -36,6 +32,9 @@ public class AddItemFragment extends Fragment {
     private String mParam2;
     private String masterPassword;
     private BottomNavigationView bottomNavigationView;
+    private ImageView checkPassword;
+    private HTTPConnector httpConnector;
+    private String pwnedPasswords;
 
 
     public AddItemFragment() {
@@ -74,6 +73,8 @@ public class AddItemFragment extends Fragment {
         vaultDbHelper = new VaultDbHelper(getContext());
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         masterPassword = getArguments().getString("masterPassword");
+        checkPassword =  view.findViewById(R.id.checkPasswordAdd);
+        httpConnector =  new HTTPConnector();
         saveButton.setOnClickListener(view -> {
             if(isNameEmpty(view)) {
                 openEmptyNameDialog();
@@ -88,6 +89,25 @@ public class AddItemFragment extends Fragment {
                 bottomNavigationView.setSelectedItemId(R.id.vault);
                 showToast();
             }
+        });
+        checkPassword.setOnClickListener(view -> {
+            httpConnector.setHash("0226b");
+            Thread thread = new Thread(() -> {
+                try  {
+                    this.pwnedPasswords =  httpConnector.doInBackground();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
         });
         return view;
     }
@@ -142,5 +162,4 @@ public class AddItemFragment extends Fragment {
         toast.setView(layout);
         toast.show();
     }
-
 }
