@@ -3,6 +3,7 @@ package filip.ondrusek.uv.passwordmanager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
     private String masterPassword;
     private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
+    private VaultModel vaultModel;
 
     public VaultAdapter(){
 
@@ -64,19 +66,30 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Cursor cursor = getVaultCursor();
-            cursor.moveToPosition(getAdapterPosition());
             String id = vaultCursor.getString(vaultCursor.getColumnIndexOrThrow(VaultContract.VaultEntry._ID));
             switch (item.getItemId()) {
 
                 case R.id.action_popup_delete:
+                    Cursor cursor = getVaultCursor();
+                    cursor.moveToPosition(getAdapterPosition());
                     vaultDbHelper.deleteItem(masterPassword,id);
                     setVaultCursor(getVaultItems());
                     notifyItemRemoved(getAdapterPosition());
                     return true;
                 case R.id.action_popup_edit:
+                    setVaultCursor(getItemById(id));
+                    createItemObject(vaultCursor);
+                    vaultCursor.close();
                     Intent intent = new Intent(mContext, EditItemActivity.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("vaultModel", vaultModel);
+                    intent.putExtras(b);
+                    b.putSerializable("id", id);
+                    intent.putExtras(b);
+                    b.putSerializable("masterPassword", masterPassword);
+                    intent.putExtras(b);
                     mContext.startActivity(intent);
+                    return true;
                 default:
                     return false;
             }
@@ -120,5 +133,29 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
         String[] selectionArgs = new String[]{};
         Cursor c = db.rawQuery(selectQuery, selectionArgs );
         return c;
+    }
+
+    public Cursor getItemById(String id) {
+        SQLiteDatabase db = vaultDbHelper.getDatabase(masterPassword);
+        String selectQuery = "SELECT * FROM vault WHERE _id = ?";
+        String[] selectionArgs = new String[]{id};
+        Cursor c = db.rawQuery(selectQuery, selectionArgs);
+        return c;
+    }
+
+    private void createItemObject(Cursor cursor) {
+        try {
+            cursor.moveToFirst();
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_NAME));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_USERNAME));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_PASSWORD));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_URL));
+                String notes = cursor.getString(cursor.getColumnIndexOrThrow(VaultContract.VaultEntry.COLUMN_NAME_NOTES));
+                vaultModel = new VaultModel(name, username, password, url, notes);
+            } while (cursor.moveToNext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

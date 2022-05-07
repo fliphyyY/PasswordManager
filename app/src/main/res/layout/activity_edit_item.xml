@@ -3,7 +3,180 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditItemActivity">
+    android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:id="@+id/linearLayoutEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000000"
+        android:gravity="left"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cancel_buttonEdit"
+            android:layout_width="70dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="@string/cancel"
+            android:textSize="16sp"></TextView>
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/edit_item_headline"
+            android:textStyle="bold"
+            android:layout_marginLeft="50dp"
+            android:textSize="18sp"></TextView>
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameTextInputEdit"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:expandedHintEnabled="false"
+        app:layout_constraintVertical_bias="0.13">
+
+
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="name"
+            android:ems="10"
+            android:textColor="#d3d3d3"
+            android:maxLength="25"
+            android:maxLines="1"
+            android:textSize="20sp"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameTextInputEdit"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_username"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.299"
+        >
+
+
+        <EditText
+            android:id="@+id/usernameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="name"
+            android:ems="10"
+            android:textColor="#d3d3d3"
+            android:inputType="none"
+            android:maxLength="25"
+            android:maxLines="1"
+            android:textSize="20sp"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextEdit"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_password"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:passwordToggleEnabled="true"
+       >
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="password"
+            android:ems="10"
+            android:textColor="#d3d3d3"
+            android:inputType="textPassword"
+            android:maxLength="45"
+            android:maxLines="1"
+            android:textSize="20sp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/urlTextInputEdit"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_url"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.624"
+        >
+
+
+        <EditText
+            android:id="@+id/urlEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="name"
+            android:ems="10"
+            android:inputType="textUri"
+            android:maxLength="25"
+            android:textColor="#d3d3d3"
+            android:maxLines="1"
+            android:textSize="20sp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_email_layoutEdit"
+        style="@style/Theme.App.Base"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
+        android:hint="@string/add_notes"
+        app:expandedHintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlTextInputEdit">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notesEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="name"
+            android:ems="10"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLength="144"
+            android:maxLines="5"
+            android:textColor="#d3d3d3"
+            android:textSize="20sp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
