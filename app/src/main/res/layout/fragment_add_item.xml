@@ -95,15 +95,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordTextInput"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_width="279dp"
+        android:layout_height="84dp"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintVertical_bias="0.464"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -113,12 +113,26 @@
             android:autofillHints="password"
             android:ems="10"
             android:hint="@string/add_password"
-            android:textColor="#d3d3d3"
             android:inputType="textPassword"
             android:maxLength="45"
             android:maxLines="1"
+            android:textColor="#d3d3d3"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/checkPasswordAdd"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:src="@drawable/ic_baseline_check_circle_24"
+        app:layout_constraintBottom_toBottomOf="@+id/login_email_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toEndOf="@+id/passwordTextInput"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.471" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/urlTextInput"
