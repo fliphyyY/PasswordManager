@@ -10,13 +10,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
-public  class PwnedPasswordHandling  {
+public  class PwnedPasswordHandling {
     private static String hashString;
     private final HTTPConnector httpConnector = new HTTPConnector();
     private String pwnedPasswords;
     private FragmentManager fragmentManager;
+    private Context context;
 
-    public PwnedPasswordHandling(FragmentManager fragmentManager) {this.fragmentManager = fragmentManager;}
+    public PwnedPasswordHandling(FragmentManager fragmentManager, Context context) {
+        this.fragmentManager = fragmentManager;
+        this.context = context;
+    }
 
     public  void hashPassword(String input)
     {
@@ -60,11 +64,13 @@ public  class PwnedPasswordHandling  {
 
     private void isPasswordPwned()
     {
+        String a = "";
         String hashSuffix = hashString.substring(5,32).toUpperCase(Locale.ROOT);
         if(pwnedPasswords.contains(hashSuffix))
         {
-            openEmptyNameDialog("Warning!", "Password Exposed!", "exposed_password");
+            openEmptyNameDialog(context.getResources().getString(R.string.warning), context.getResources().getString(R.string.password_exposed), "exposed_password");
         } else {
+            openEmptyNameDialog(context.getResources().getString(R.string.notice), context.getResources().getString(R.string.password_no_exposed), "password_ok");
 
         }
     }

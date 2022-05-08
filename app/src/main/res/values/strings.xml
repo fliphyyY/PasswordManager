@@ -12,7 +12,11 @@
     <string name="create_vault_headline">FlipPass...</string>
     <string name="empty_name_text">The Name field is required.</string>
     <string name="error_dialog">"An error has occurred."</string>
+    <string name="warning">"Warning!"</string>
+    <string name="password_exposed">"The password has been found in data breaches. You should change it."</string>
     <string name="hello_blank_fragment">Vault fragment</string>
+    <string name="notice">Notice</string>
+    <string name="password_no_exposed">The password was not found in any known data breaches. It should be safe to use.</string>
     <string name="min_length">Minimal password length is at least 8 characters!!</string>
     <string name="space_password">Password cannot contain space!!</string>
     <string name="number_password">Password must contain at least one digit character!!</string>

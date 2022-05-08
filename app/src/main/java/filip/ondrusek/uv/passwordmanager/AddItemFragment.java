@@ -73,7 +73,8 @@ public class AddItemFragment extends Fragment {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         masterPassword = getArguments().getString("masterPassword");
         checkPassword =  view.findViewById(R.id.checkPasswordAdd);
-        pwnedPasswordHandling =  new PwnedPasswordHandling(getActivity().getSupportFragmentManager());
+        pwnedPasswordHandling =  new PwnedPasswordHandling(getActivity().getSupportFragmentManager(), getActivity().getApplicationContext());
+
         saveButton.setOnClickListener(view -> {
             if(isNameEmpty(view)) {
                 openEmptyNameDialog();
@@ -89,9 +90,14 @@ public class AddItemFragment extends Fragment {
                 showToast();
             }
         });
-        checkPassword.setOnClickListener(view -> {
-            pwnedPasswordHandling.hashPassword(this.password.getText().toString());
+
+            checkPassword.setOnClickListener(view -> {
+                String passwordTextView = this.password.getText().toString();
+                if(passwordTextView.length() > 0) {
+                    pwnedPasswordHandling.hashPassword(passwordTextView);
+                }
             });
+
         return view;
     }
 
