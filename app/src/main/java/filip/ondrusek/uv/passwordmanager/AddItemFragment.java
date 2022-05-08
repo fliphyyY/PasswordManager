@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
 
 
 public class AddItemFragment extends Fragment {
@@ -34,6 +35,7 @@ public class AddItemFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private ImageView checkPassword;
     private PwnedPasswordHandling pwnedPasswordHandling;
+    private boolean internetConnection;
 
 
     public AddItemFragment() {
@@ -87,14 +89,29 @@ public class AddItemFragment extends Fragment {
                 vaultFragmentChange.setArguments(bundleVaultChange);
                 replaceFragment(vaultFragmentChange);
                 bottomNavigationView.setSelectedItemId(R.id.vault);
-                showToast();
+                showToast(getResources().getString(R.string.item_created));
             }
         });
 
             checkPassword.setOnClickListener(view -> {
                 String passwordTextView = this.password.getText().toString();
                 if(passwordTextView.length() > 0) {
-                    pwnedPasswordHandling.hashPassword(passwordTextView);
+                try {
+                    isConnected();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(internetConnection) {
+
+                        pwnedPasswordHandling.hashPassword(passwordTextView);
+                    } else {
+                    showToast(getResources().getString(R.string.no_internet));
+                    }
+                }
+               else {
+                    showToast(getResources().getString(R.string.empty_password));
                 }
             });
 
@@ -136,7 +153,7 @@ public class AddItemFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    private void showToast()
+    private void showToast(String text)
     {
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.toast_layout, view.findViewById(R.id.toast_root));
@@ -144,8 +161,15 @@ public class AddItemFragment extends Fragment {
         Toast toast = new Toast(getContext());
         toast.setGravity(Gravity.CENTER, 0,600);
         toast.setDuration(Toast.LENGTH_LONG);
-        toastText.setText("New item created.");
+        toastText.setText(text);
         toast.setView(layout);
         toast.show();
+    }
+
+    private void isConnected() throws InterruptedException, IOException {
+
+        String command = "ping -c 1 google.com";
+        internetConnection = Runtime.getRuntime().exec(command).waitFor() == 0;
+
     }
 }

@@ -33,5 +33,7 @@
     <string name="added_item">New item created.</string>
     <string name="delete_popup">Delete</string>
     <string name="edit_item">Edit</string>
-
+    <string name="item_created">New item created.</string>
+    <string name="empty_password">Password input is empty!</string>
+    <string name="no_internet">Password exposure in a data breach cannot be checked because no internet connection.</string>
 </resources>
