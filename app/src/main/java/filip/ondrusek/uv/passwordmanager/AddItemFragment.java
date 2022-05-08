@@ -33,8 +33,7 @@ public class AddItemFragment extends Fragment {
     private String masterPassword;
     private BottomNavigationView bottomNavigationView;
     private ImageView checkPassword;
-    private HTTPConnector httpConnector;
-    private String pwnedPasswords;
+    private PwnedPasswordHandling pwnedPasswordHandling;
 
 
     public AddItemFragment() {
@@ -74,7 +73,7 @@ public class AddItemFragment extends Fragment {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         masterPassword = getArguments().getString("masterPassword");
         checkPassword =  view.findViewById(R.id.checkPasswordAdd);
-        httpConnector =  new HTTPConnector();
+        pwnedPasswordHandling =  new PwnedPasswordHandling(getActivity().getSupportFragmentManager());
         saveButton.setOnClickListener(view -> {
             if(isNameEmpty(view)) {
                 openEmptyNameDialog();
@@ -91,24 +90,8 @@ public class AddItemFragment extends Fragment {
             }
         });
         checkPassword.setOnClickListener(view -> {
-            httpConnector.setHash("0226b");
-            Thread thread = new Thread(() -> {
-                try  {
-                    this.pwnedPasswords =  httpConnector.doInBackground();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            pwnedPasswordHandling.hashPassword(this.password.getText().toString());
             });
-
-            thread.start();
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-        });
         return view;
     }
 
@@ -129,18 +112,15 @@ public class AddItemFragment extends Fragment {
         vaultDbHelper.insertItem(itemValues, masterPassword);
     }
 
-    public void openEmptyNameDialog()
+    private void openEmptyNameDialog()
     {
-        EmptyNameDialog emptyNameDialog = new EmptyNameDialog();
-        emptyNameDialog.show(getActivity().getSupportFragmentManager(), "empty name");
+        EmptyNameDialog emptyNameDialog = new EmptyNameDialog(getResources().getString(R.string.error_dialog), getResources().getString(R.string.empty_name_text));
+        emptyNameDialog.show(getActivity().getSupportFragmentManager(), "empty_name");
     }
 
     private boolean isNameEmpty(View view)
     {
-        if(this.name.getText().length() == 0) {
-            return true;
-        }
-        return false;
+        return this.name.getText().length() == 0;
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -153,7 +133,7 @@ public class AddItemFragment extends Fragment {
     private void showToast()
     {
         LayoutInflater layoutInflater = getLayoutInflater();
-        View layout = layoutInflater.inflate(R.layout.toast_layout, (ViewGroup) view.findViewById(R.id.toast_root));
+        View layout = layoutInflater.inflate(R.layout.toast_layout, view.findViewById(R.id.toast_root));
         TextView toastText = layout.findViewById(R.id.toast_text);
         Toast toast = new Toast(getContext());
         toast.setGravity(Gravity.CENTER, 0,600);

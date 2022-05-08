@@ -52,11 +52,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if(s.length() >= MAX_LENGTH) {
-                        logInButton.setEnabled(true);
-                    } else {
-                        logInButton.setEnabled(false);
-                    }
+                    logInButton.setEnabled(s.length() >= MAX_LENGTH);
                 }
             });
         });

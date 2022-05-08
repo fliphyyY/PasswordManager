@@ -15,6 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class EmptyNameDialog extends AppCompatDialogFragment {
+    private String title;
+    private String text;
+    private TextView textViewDialog;
+
+    public EmptyNameDialog(String title, String text)
+    {
+        this.title = title;
+        this.text = text;
+    }
 
     @NonNull
     @Override
@@ -22,15 +31,18 @@ public class EmptyNameDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.empty_name_dialog, null);
+        textViewDialog = view.findViewById(R.id.textViewDialog);
+        textViewDialog.setText(text);
 
         builder.setView(view)
-                .setTitle("An error has occurred.")
+                .setTitle(title)
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 });
+
         return builder.create();
     }
 }

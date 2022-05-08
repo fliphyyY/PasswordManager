@@ -70,18 +70,15 @@ public class EditItemActivity extends AppCompatActivity {
         notes.setText(vaultModel.getNotes());
     }
 
-    public void openEmptyNameDialog()
+    private void openEmptyNameDialog()
     {
-        EmptyNameDialog emptyNameDialog = new EmptyNameDialog();
-        emptyNameDialog.show(getSupportFragmentManager(), "empty name");
+        EmptyNameDialog emptyNameDialog = new EmptyNameDialog(getResources().getString(R.string.error_dialog), getResources().getString(R.string.empty_name_text));
+        emptyNameDialog.show(getSupportFragmentManager(), "empty_name");
     }
 
     private boolean isNameEmpty(View view)
     {
-        if(this.name.getText().length() == 0) {
-            return true;
-        }
-        return false;
+        return this.name.getText().length() == 0;
     }
 
     private void updateItem(View view)

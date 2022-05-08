@@ -45,11 +45,7 @@ public class CreateVaultActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (s.toString().equals(masterPasswordAgain.getText().toString()) && s.length() > 0 && !textInputLayoutCreate.isErrorEnabled()) {
-                        samePasswords = true;
-                    } else {
-                        samePasswords = false;
-                    }
+                    samePasswords = s.toString().equals(masterPasswordAgain.getText().toString()) && s.length() > 0 && !textInputLayoutCreate.isErrorEnabled();
                     if (!textInputLayoutCreate.isErrorEnabled() && !passwordValidationCorrect) {
                         masterPasswordAgain.setEnabled(true);
                         passwordValidationCorrect = true;
@@ -62,11 +58,7 @@ public class CreateVaultActivity extends AppCompatActivity {
                         hideKeyboard(v);
                     } else {
                         createVaultButton.setEnabled(false);
-                        if (!passwordValidationCorrect) {
-                            masterPasswordAgain.setEnabled(false);
-                        } else {
-                            masterPasswordAgain.setEnabled(true);
-                        }
+                        masterPasswordAgain.setEnabled(passwordValidationCorrect);
                     }
                     if (textInputLayoutCreateAgain.isErrorEnabled()) {
                         textInputLayoutCreateAgain.setError(null);
