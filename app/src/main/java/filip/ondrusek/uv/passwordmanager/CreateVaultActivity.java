@@ -179,15 +179,6 @@ public class CreateVaultActivity extends AppCompatActivity {
         return !m.find();
     }
 
-    @Override
-    protected void onRestart()
-    {
-        super.onRestart();
-        Intent intent = new Intent(CreateVaultActivity.this, AuthenticationActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
 
     @Override
     public void onBackPressed() { }
