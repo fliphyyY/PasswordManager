@@ -26,7 +26,7 @@ public class EditItemActivity extends AppCompatActivity {
     private TextInputEditText notes;
     private String id;
     private VaultDbHelper vaultDbHelper;
-    private ImageView checkPassword;
+    private ImageView checkPassword, generatePassword;
     private PwnedPasswordHandling pwnedPasswordHandling;
 
     @Override
@@ -45,6 +45,7 @@ public class EditItemActivity extends AppCompatActivity {
         notes = findViewById(R.id.notesEdit);
         vaultDbHelper = new VaultDbHelper(getApplicationContext());
         checkPassword = findViewById(R.id.checkPasswordEdit);
+        generatePassword = findViewById(R.id.generatePasswordEdit);
         pwnedPasswordHandling =  new PwnedPasswordHandling(getSupportFragmentManager(), getApplicationContext());
 
         cancelButton.setOnClickListener(view1 -> {

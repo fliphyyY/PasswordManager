@@ -33,7 +33,7 @@ public class AddItemFragment extends Fragment {
     private String mParam2;
     private String masterPassword;
     private BottomNavigationView bottomNavigationView;
-    private ImageView checkPassword;
+    private ImageView checkPassword, generatePassword;
     private PwnedPasswordHandling pwnedPasswordHandling;
 
 
@@ -74,6 +74,7 @@ public class AddItemFragment extends Fragment {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         masterPassword = getArguments().getString("masterPassword");
         checkPassword =  view.findViewById(R.id.checkPasswordAdd);
+        generatePassword = view.findViewById(R.id.generatePasswordAdd);
         pwnedPasswordHandling =  new PwnedPasswordHandling(getActivity().getSupportFragmentManager(), getActivity().getApplicationContext());
 
         saveButton.setOnClickListener(view -> {
