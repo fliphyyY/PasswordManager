@@ -17,6 +17,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import static org.apache.commons.lang3.RandomStringUtils.*;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 
 public class AddItemFragment extends Fragment {
@@ -116,6 +120,11 @@ public class AddItemFragment extends Fragment {
                 }
             });
 
+            generatePassword.setOnClickListener(view -> {
+                char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?")).toCharArray();
+                password.setText(RandomStringUtils.random( 16, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom()));
+
+        });
         return view;
     }
 

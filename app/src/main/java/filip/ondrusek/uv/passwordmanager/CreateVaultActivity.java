@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,8 @@ public class CreateVaultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_create_vault);
         init();
         masterPassword.setOnFocusChangeListener((v, hasFocus) -> {
@@ -175,6 +178,16 @@ public class CreateVaultActivity extends AppCompatActivity {
         Matcher m = pattern.matcher(password);
         return !m.find();
     }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Intent intent = new Intent(CreateVaultActivity.this, AuthenticationActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public void onBackPressed() { }

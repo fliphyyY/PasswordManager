@@ -1,7 +1,9 @@
 package filip.ondrusek.uv.passwordmanager;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,8 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         masterPassword = (String) getIntent().getSerializableExtra("masterPassword");
@@ -57,6 +61,15 @@ public class NavigationActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Intent intent = new Intent(NavigationActivity.this, AuthenticationActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

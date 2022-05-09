@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +17,10 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.io.IOException;
+import java.security.SecureRandom;
 
 public class EditItemActivity extends AppCompatActivity {
     private VaultModel vaultModel;
@@ -32,6 +36,8 @@ public class EditItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_edit_item);
         vaultModel = (VaultModel) getIntent().getSerializableExtra("vaultModel");
         masterPassword = (String) getIntent().getSerializableExtra("masterPassword");
@@ -95,6 +101,12 @@ public class EditItemActivity extends AppCompatActivity {
             }
         });
 
+        generatePassword.setOnClickListener(view -> {
+            char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?")).toCharArray();
+            password.setText(RandomStringUtils.random( 16, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom()));
+
+        });
+
         name.setText(vaultModel.getName());
         username.setText(vaultModel.getUsername());
         password.setText(vaultModel.getPassword());
@@ -144,6 +156,15 @@ public class EditItemActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Intent intent = new Intent(EditItemActivity.this, AuthenticationActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";

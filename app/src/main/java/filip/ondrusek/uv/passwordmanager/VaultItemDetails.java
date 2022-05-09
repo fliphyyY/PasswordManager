@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.ClipboardManager;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ public class VaultItemDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_vault_item_details);
         vaultModel = (VaultModel) getIntent().getSerializableExtra("vaultModel");
         masterPassword = (String) getIntent().getSerializableExtra("masterPassword");
@@ -101,6 +104,18 @@ public class VaultItemDetails extends AppCompatActivity {
         toastText.setText(text);
         toast.setView(layout);
         toast.show();
+    }
+
+    @Override
+    public void onBackPressed() { }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Intent intent = new Intent(VaultItemDetails.this, AuthenticationActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void isConnected() throws InterruptedException, IOException {

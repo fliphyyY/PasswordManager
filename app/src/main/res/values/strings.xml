@@ -9,7 +9,7 @@
     <string name="add_url">URL</string>
     <string name="add_notes">Notes</string>
     <string name="add_password">Password</string>
-    <string name="create_vault_headline">FlipPass...</string>
+    <string name="create_vault_headline">FelipePass...</string>
     <string name="empty_name_text">The Name field is required.</string>
     <string name="error_dialog">"An error has occurred."</string>
     <string name="warning">"Warning!"</string>
