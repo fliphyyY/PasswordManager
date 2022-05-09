@@ -95,16 +95,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordTextInput"
-        android:layout_width="279dp"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
+        app:expandedHintEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.466"
-        app:passwordToggleEnabled="true"
-        app:expandedHintEnabled="false">
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/passwordDetail"
@@ -112,17 +112,17 @@
             android:layout_height="match_parent"
             android:autofillHints="password"
             android:ems="10"
+            android:enabled="false"
             android:hint="@string/add_password"
             android:inputType="textPassword"
             android:maxLength="45"
             android:maxLines="1"
             android:textColor="#d3d3d3"
-            android:textSize="20sp"
-            android:enabled="false"/>
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/checkPasswordAdd"
+        android:id="@+id/checkPasswordDetail"
         android:layout_width="53dp"
         android:layout_height="53dp"
         android:gravity="center"
@@ -130,10 +130,24 @@
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintBottom_toBottomOf="@+id/notesTextInputDetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/passwordTextInput"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478"  />
+        app:layout_constraintVertical_bias="0.476" />
+
+    <ImageView
+        android:id="@+id/copyPassword"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:src="@drawable/ic_baseline_content_copy_24"
+        app:layout_constraintBottom_toBottomOf="@+id/notesTextInputDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/passwordTextInput"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/urlTextInputDetail"

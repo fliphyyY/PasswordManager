@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +27,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     private EditText masterPassword;
     private TextInputLayout textInputLayoutAuthentication;
     private Button logInButton;
-    private SQLiteDatabase database ;
+    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) throws SQLiteException{
@@ -52,7 +55,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    logInButton.setEnabled(s.length() >= MAX_LENGTH);
+                    logInButton.setEnabled(s.length() > 0);
                 }
             });
         });
@@ -76,11 +79,26 @@ public class AuthenticationActivity extends AppCompatActivity {
             VaultDbHelper vaultDbHelper = new VaultDbHelper(getApplicationContext());
             database = vaultDbHelper.getWritableDatabase(masterPassword.getText().toString());
         } catch (SQLiteException sqLiteException) {
-            Toast.makeText(getApplicationContext(), "Wrong password!", Toast.LENGTH_LONG).show();
+            showToast(getResources().getString(R.string.wrong_password));
         }
     }
     private void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    private void showToast(String text)
+    {
+        View layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.toast_layout, null);
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0,600);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toastText.setText(text);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    @Override
+    public void onBackPressed() { }
 }

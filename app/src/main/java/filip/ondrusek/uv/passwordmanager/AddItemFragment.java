@@ -35,7 +35,6 @@ public class AddItemFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private ImageView checkPassword;
     private PwnedPasswordHandling pwnedPasswordHandling;
-    private boolean internetConnection;
 
 
     public AddItemFragment() {
@@ -94,10 +93,11 @@ public class AddItemFragment extends Fragment {
         });
 
             checkPassword.setOnClickListener(view -> {
+                boolean internetConnection = false;
                 String passwordTextView = this.password.getText().toString();
                 if(passwordTextView.length() > 0) {
                 try {
-                    isConnected();
+                        internetConnection = isConnected();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -166,10 +166,8 @@ public class AddItemFragment extends Fragment {
         toast.show();
     }
 
-    private void isConnected() throws InterruptedException, IOException {
-
+    private boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";
-        internetConnection = Runtime.getRuntime().exec(command).waitFor() == 0;
-
+        return Runtime.getRuntime().exec(command).waitFor() == 0;
     }
 }

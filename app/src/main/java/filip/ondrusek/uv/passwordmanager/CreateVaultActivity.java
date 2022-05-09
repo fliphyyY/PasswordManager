@@ -175,4 +175,7 @@ public class CreateVaultActivity extends AppCompatActivity {
         Matcher m = pattern.matcher(password);
         return !m.find();
     }
+
+    @Override
+    public void onBackPressed() { }
 }

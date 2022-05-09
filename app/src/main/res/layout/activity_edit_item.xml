@@ -130,7 +130,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/checkPasswordAdd"
+        android:id="@+id/checkPasswordEdit"
         android:layout_width="53dp"
         android:layout_height="53dp"
         android:gravity="center"

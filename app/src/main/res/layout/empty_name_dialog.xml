@@ -8,6 +8,9 @@
         android:id="@+id/textViewDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/empty_name_text">
+        android:clickable="false"
+        android:focusable="false"
+        android:inputType="none"
+        >
     </EditText>
 </RelativeLayout>

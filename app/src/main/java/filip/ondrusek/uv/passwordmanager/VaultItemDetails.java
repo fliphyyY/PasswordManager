@@ -2,14 +2,21 @@ package filip.ondrusek.uv.passwordmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.content.ClipboardManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.IOException;
 
 public class VaultItemDetails extends AppCompatActivity {
     private VaultModel vaultModel;
@@ -17,6 +24,10 @@ public class VaultItemDetails extends AppCompatActivity {
     private String masterPassword;
     private EditText name, username, password, url;
     private TextInputEditText notes;
+    private ImageView checkPassword, copyPassword;
+    private boolean internetConnection;
+    private PwnedPasswordHandling pwnedPasswordHandling;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,10 @@ public class VaultItemDetails extends AppCompatActivity {
         password = findViewById(R.id.passwordDetail);
         url = findViewById(R.id.urlDetail);
         notes = findViewById(R.id.notesDetail);
+        checkPassword = findViewById(R.id.checkPasswordDetail);
+        copyPassword = findViewById(R.id.copyPassword);
+        pwnedPasswordHandling =  new PwnedPasswordHandling(getSupportFragmentManager(), getApplicationContext());
+
 
         cancelButton.setOnClickListener(view1 -> {
             Intent intent = new Intent(VaultItemDetails.this, NavigationActivity.class);
@@ -44,7 +59,53 @@ public class VaultItemDetails extends AppCompatActivity {
         password.setText(vaultModel.getPassword());
         url.setText(vaultModel.getUrl());
         notes.setText(vaultModel.getNotes());
+
+        checkPassword.setOnClickListener(view -> {
+            String passwordTextView = this.password.getText().toString();
+            if(passwordTextView.length() > 0) {
+                try {
+                    isConnected();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(internetConnection) {
+
+                    pwnedPasswordHandling.hashPassword(passwordTextView);
+                } else {
+                    showToast(getResources().getString(R.string.no_internet));
+                }
+            }
+            else {
+                showToast(getResources().getString(R.string.empty_password));
+            }
+        });
+
+        copyPassword.setOnClickListener(view -> {
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("passwordClip", password.getText());
+            clipboardManager.setPrimaryClip(clipData);
+            showToast(getResources().getString(R.string.copy_password));
+        });
     }
 
+    private void showToast(String text)
+    {
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View layout = layoutInflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0,600);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toastText.setText(text);
+        toast.setView(layout);
+        toast.show();
+    }
 
+    private void isConnected() throws InterruptedException, IOException {
+
+        String command = "ping -c 1 google.com";
+        internetConnection = Runtime.getRuntime().exec(command).waitFor() == 0;
+    }
 }

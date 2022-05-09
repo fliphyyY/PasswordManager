@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.IOException;
 
 public class EditItemActivity extends AppCompatActivity {
     private VaultModel vaultModel;
@@ -23,6 +26,9 @@ public class EditItemActivity extends AppCompatActivity {
     private TextInputEditText notes;
     private String id;
     private VaultDbHelper vaultDbHelper;
+    private ImageView checkPassword;
+    private PwnedPasswordHandling pwnedPasswordHandling;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,8 @@ public class EditItemActivity extends AppCompatActivity {
         url = findViewById(R.id.urlEdit);
         notes = findViewById(R.id.notesEdit);
         vaultDbHelper = new VaultDbHelper(getApplicationContext());
+        checkPassword = findViewById(R.id.checkPasswordEdit);
+        pwnedPasswordHandling =  new PwnedPasswordHandling(getSupportFragmentManager(), getApplicationContext());
 
         cancelButton.setOnClickListener(view1 -> {
             Intent intent = new Intent(this, NavigationActivity.class);
@@ -59,7 +67,30 @@ public class EditItemActivity extends AppCompatActivity {
                 b.putSerializable("masterPassword", masterPassword);
                 intent.putExtras(b);
                 startActivity(intent);
-                showToast();
+                showToast(getResources().getString(R.string.item_updated));
+            }
+        });
+
+        checkPassword.setOnClickListener(view -> {
+            boolean internetConnection = false;
+            String passwordTextView = this.password.getText().toString();
+            if(passwordTextView.length() > 0) {
+                try {
+                    internetConnection = isConnected();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(internetConnection) {
+
+                    pwnedPasswordHandling.hashPassword(passwordTextView);
+                } else {
+                    showToast(getResources().getString(R.string.no_internet));
+                }
+            }
+            else {
+                showToast(getResources().getString(R.string.empty_password));
             }
         });
 
@@ -98,16 +129,23 @@ public class EditItemActivity extends AppCompatActivity {
         vaultDbHelper.updateItem(masterPassword, itemValues, id);
     }
 
-    private void showToast()
+    private void showToast(String text)
     {
         View layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.toast_layout, null);
         TextView toastText = layout.findViewById(R.id.toast_text);
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.CENTER, 0,600);
         toast.setDuration(Toast.LENGTH_LONG);
-        toastText.setText("Item updated.");
+        toastText.setText(text);
         toast.setView(layout);
         toast.show();
     }
 
+    @Override
+    public void onBackPressed() { }
+
+    private boolean isConnected() throws InterruptedException, IOException {
+        String command = "ping -c 1 google.com";
+        return Runtime.getRuntime().exec(command).waitFor() == 0;
+    }
 }
