@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PasswordManager</string>
+    <string name="app_name">FelipePass</string>
     <string name="create_vault">Create vault</string>
     <string name="unlock_vault">Unlock vault</string>
     <string name="master_password">Master password</string>
