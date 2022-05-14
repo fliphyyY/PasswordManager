@@ -93,7 +93,7 @@ public class AddItemFragment extends Fragment {
                 vaultFragmentChange.setArguments(bundleVaultChange);
                 replaceFragment(vaultFragmentChange);
                 bottomNavigationView.setSelectedItemId(R.id.vault);
-                showToast(getResources().getString(R.string.item_created));
+                ((NavigationActivity)getActivity()).showToast(getResources().getString(R.string.item_created));
             }
         });
 
@@ -112,11 +112,11 @@ public class AddItemFragment extends Fragment {
 
                         pwnedPasswordHandling.hashPassword(passwordTextView);
                     } else {
-                    showToast(getResources().getString(R.string.no_internet));
+                    ((NavigationActivity)getActivity()).showToast(getResources().getString(R.string.no_internet));
                     }
                 }
                else {
-                    showToast(getResources().getString(R.string.empty_password));
+                    ((NavigationActivity)getActivity()).showToast(getResources().getString(R.string.empty_password));
                 }
             });
 
@@ -153,7 +153,7 @@ public class AddItemFragment extends Fragment {
 
     private boolean isNameEmpty(View view)
     {
-        return this.name.getText().length() == 0;
+        return this.name.getText().length() == 0 || this.name.getText().toString().trim().isEmpty();
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -163,18 +163,6 @@ public class AddItemFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    private void showToast(String text)
-    {
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View layout = layoutInflater.inflate(R.layout.toast_layout, view.findViewById(R.id.toast_root));
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        Toast toast = new Toast(getContext());
-        toast.setGravity(Gravity.CENTER, 0,600);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toastText.setText(text);
-        toast.setView(layout);
-        toast.show();
-    }
 
     private boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";

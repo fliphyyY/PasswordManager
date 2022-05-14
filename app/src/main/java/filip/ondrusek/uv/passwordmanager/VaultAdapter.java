@@ -27,14 +27,16 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
     private VaultDbHelper vaultDbHelper;
     private View.OnClickListener onItemClickListener;
     private VaultModel vaultModel;
+    private TextView emptyVault;
 
     public VaultAdapter(){
 
     }
-    public VaultAdapter(Context context, Cursor cursor, String masterPassword) {
+    public VaultAdapter(Context context, Cursor cursor, String masterPassword, TextView textView) {
         this.mContext = context;
         this.vaultCursor = cursor;
         this.masterPassword = masterPassword;
+        this.emptyVault = textView;
         vaultDbHelper = new VaultDbHelper(mContext.getApplicationContext());
 
     }
@@ -89,6 +91,10 @@ public class VaultAdapter extends RecyclerView.Adapter<VaultAdapter.VaultViewHol
                 case R.id.action_popup_delete:
                     vaultDbHelper.deleteItem(masterPassword,id);
                     setVaultCursor(getVaultItems());
+                    if(vaultCursor.getCount() < 1)
+                    {
+                        emptyVault.setVisibility(View.VISIBLE);
+                    }
                     notifyItemRemoved(getAdapterPosition());
                     showToast();
                     return true;

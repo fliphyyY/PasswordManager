@@ -10,7 +10,5 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:focusable="false"
-        android:inputType="none"
-        >
-    </EditText>
+        android:inputType="none"></EditText>
 </RelativeLayout>

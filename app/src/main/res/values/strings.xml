@@ -35,8 +35,12 @@
     <string name="edit_item">Edit</string>
     <string name="item_created">New item created.</string>
     <string name="empty_password">Password input is empty!</string>
+    <string name="delete_database_notice">Database has been deleted!</string>
     <string name="copy_password">Password has been copied.</string>
     <string name="no_internet">Password exposure in a data breach cannot be checked because no internet connection.</string>
     <string name="item_updated">Item updated.</string>
     <string name="wrong_password">Wrong password!</string>
+    <string name="delete_database">Delete database</string>
+    <string name="delete_database_dialog">Deleting the database cannot be undone. Are you sure you want to continue?</string>
+    <string name="empty_vault">The vault is empty.</string>
 </resources>

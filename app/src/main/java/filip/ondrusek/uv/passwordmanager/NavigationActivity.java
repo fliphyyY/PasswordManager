@@ -3,7 +3,12 @@ package filip.ondrusek.uv.passwordmanager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -70,6 +75,19 @@ public class NavigationActivity extends AppCompatActivity {
         Intent intent = new Intent(NavigationActivity.this, AuthenticationActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void showToast(String text)
+    {
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View layout = layoutInflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root));
+        TextView toastText = layout.findViewById(R.id.toast_text);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0,600);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toastText.setText(text);
+        toast.setView(layout);
+        toast.show();
     }
 
     @Override

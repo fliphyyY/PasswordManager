@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -36,6 +38,7 @@ public class VaultFragment extends Fragment {
     private String masterPassword;
     private Cursor vaultCursor;
     private VaultModel vaultModel;
+    private TextView emptyVault;
     private final View.OnClickListener onItemClickListener = view -> {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
         int position = viewHolder.getAdapterPosition();
@@ -94,10 +97,17 @@ public class VaultFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         vaultDbHelper = new VaultDbHelper(getContext());
         vaultCursor = getVaultItems();
-        vaultAdapter = new VaultAdapter(getContext(), vaultCursor, masterPassword);
+        emptyVault = view.findViewById(R.id.emptyVaultText);
+        vaultAdapter = new VaultAdapter(getContext(), vaultCursor, masterPassword, emptyVault);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(vaultAdapter);
         vaultAdapter.setOnItemClickListener(onItemClickListener);
+        if(vaultCursor.getCount() < 1)
+        {
+            emptyVault.setVisibility(view.VISIBLE);
+        } else {
+            emptyVault.setVisibility(view.INVISIBLE);
+        }
         return view;
     }
 

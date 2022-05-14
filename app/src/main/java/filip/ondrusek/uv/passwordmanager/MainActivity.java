@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 createUnlockVault();
             }
-        }, 100);
+        }, 1500);
     }
 
     private void createUnlockVault() {
